@@ -1,0 +1,666 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>自由社 - #FS</title>
+<meta name="description" content="開発から交流、ゲームまで。自由な発想を共有し、仲間と共に新しいものを創り上げるコミュニティ。同盟・連携を通じて、さまざまな可能性を広げていきます。">
+<meta name="theme-color" content="#0b0a0d">
+
+<link rel="canonical" href="https://smile-devs.github.io/fdm.co/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Discord">
+<meta property="og:url" content="https://smile-devs.github.io/fdm.co/">
+<meta property="og:title" content="自由社 - #FS">
+<meta property="og:description" content="開発から交流、ゲームまで。自由な発想を共有し、仲間と共に新しいものを創り上げるコミュニティ。同盟・連携を通じて、さまざまな可能性を広げていきます。">
+<meta property="og:image" content="https://smile-devs.github.io/fdm.co/embed.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="自由社 - #FS">
+<meta name="twitter:description" content="開発から交流、ゲームまで。自由な発想を共有し、仲間と共に新しいものを創り上げるコミュニティ。同盟・連携を通じて、さまざまな可能性を広げていきます。">
+<meta name="twitter:image" content="https://smile-devs.github.io/fdm.co/embed.png">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #0b0a0d;
+  --surface: #121116;
+  --purple: #8270a7;
+  --text: #f2eff5;
+  --muted: #a19ba9;
+  --line: rgba(255,255,255,.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif JP', serif;
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.opening {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #09080b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.opening.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.opening-content {
+  text-align: center;
+  animation: openingIn 1.5s ease both;
+}
+
+.opening-label {
+  font-size: 10px;
+  letter-spacing: .55em;
+  color: #a99abb;
+  margin-bottom: 22px;
+}
+
+.opening-title {
+  font-size: clamp(38px, 8vw, 68px);
+  letter-spacing: .25em;
+  font-weight: 500;
+}
+
+.opening-line {
+  width: 0;
+  height: 1px;
+  background: var(--purple);
+  margin: 25px auto;
+  animation: lineIn 1.2s .5s ease forwards;
+}
+
+.opening-sub {
+  font-size: 11px;
+  letter-spacing: .35em;
+  color: var(--muted);
+}
+
+.skip {
+  position: absolute;
+  bottom: 35px;
+  right: 35px;
+  background: none;
+  color: #aaa;
+  border: 1px solid #444;
+  padding: 8px 18px;
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: .2em;
+  cursor: pointer;
+}
+
+@keyframes openingIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lineIn {
+  to {
+    width: 100px;
+  }
+}
+
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.logo {
+  font-size: 21px;
+  letter-spacing: .18em;
+}
+
+.logo small {
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: .35em;
+  color: var(--muted);
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+nav a {
+  font-size: 12px;
+  color: #c6c0ce;
+  transition: color .3s;
+}
+
+nav a:hover {
+  color: white;
+}
+
+.menu-button {
+  display: none;
+  background: none;
+  border: 0;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.hero {
+  min-height: 760px;
+  height: 100vh;
+  max-height: 1000px;
+  display: flex;
+  align-items: center;
+  padding: 100px 12%;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 75% 45%, rgba(91,67,122,.17), transparent 48%),
+    linear-gradient(120deg, #0b0a0d, #100e14);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 550px;
+  height: 550px;
+  border: 1px solid rgba(160,140,190,.09);
+  border-radius: 50%;
+  right: -180px;
+  top: 15%;
+  box-shadow:
+    0 0 0 60px rgba(160,140,190,.018),
+    0 0 0 120px rgba(160,140,190,.012);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.hero-label {
+  color: #ad9ac8;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: .45em;
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 9vw, 92px);
+  font-weight: 500;
+  letter-spacing: .18em;
+  line-height: 1.4;
+}
+
+.hero-description {
+  color: #aaa3b2;
+  font-size: 14px;
+  letter-spacing: .08em;
+  margin-top: 25px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 45px;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 190px;
+  padding: 14px 25px;
+  border: 1px solid rgba(255,255,255,.25);
+  font-size: 12px;
+  letter-spacing: .15em;
+  transition: .3s;
+}
+
+.button.primary {
+  background: #78658f;
+  border-color: #78658f;
+  color: white;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  background: #9581ad;
+  border-color: #9581ad;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 35px;
+  left: 12%;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: .4em;
+  color: #8b8492;
+}
+
+section {
+  padding: 120px 12%;
+}
+
+.section-label {
+  font-family: Arial, sans-serif;
+  color: #a48cbf;
+  font-size: 10px;
+  letter-spacing: .4em;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(27px, 4vw, 40px);
+  font-weight: 500;
+  letter-spacing: .12em;
+  margin-bottom: 45px;
+}
+
+.section-text {
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2.5;
+}
+
+.about {
+  background: #100f13;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 65px;
+  align-items: center;
+}
+
+.about-mark {
+  min-height: 290px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,.09);
+  background: linear-gradient(145deg, #17141c, #0c0b0e);
+  font-size: clamp(45px, 7vw, 75px);
+  letter-spacing: .2em;
+}
+
+.activities {
+  background: var(--bg);
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.activity-card {
+  padding: 35px;
+  min-height: 190px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: .35s;
+}
+
+.activity-card:hover {
+  border-color: rgba(160,135,190,.55);
+  transform: translateY(-5px);
+}
+
+.activity-number {
+  font-family: Arial, sans-serif;
+  color: #9c86b8;
+  font-size: 11px;
+  letter-spacing: .2em;
+}
+
+.activity-card h3 {
+  font-size: 22px;
+  font-weight: 500;
+  margin: 13px 0;
+}
+
+.activity-card p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.community {
+  background: #100f13;
+  border-top: 1px solid var(--line);
+}
+
+.community-panel {
+  padding: 55px;
+  background: linear-gradient(120deg, #19151f, #111014);
+  border: 1px solid rgba(255,255,255,.1);
+  text-align: center;
+}
+
+.community-panel h3 {
+  font-size: 27px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  margin-bottom: 15px;
+}
+
+.community-panel p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 30px;
+}
+
+footer {
+  padding: 45px 8%;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-logo {
+  font-size: 20px;
+  letter-spacing: .2em;
+}
+
+footer p {
+  color: #77717f;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: .1em;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+  header {
+    height: 70px;
+    padding: 0 6%;
+  }
+
+  nav {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    padding: 25px;
+    background: #111014;
+    flex-direction: column;
+    gap: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  .menu-button {
+    display: block;
+  }
+
+  .hero {
+    min-height: 700px;
+    padding: 100px 8%;
+  }
+
+  .hero h1 {
+    font-size: 52px;
+  }
+
+  section {
+    padding: 85px 8%;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .activity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .community-panel {
+    padding: 35px 20px;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="opening" id="opening">
+  <div class="opening-content">
+    <div class="opening-label">WELCOME TO</div>
+    <div class="opening-title">自由社</div>
+    <div class="opening-line"></div>
+    <div class="opening-sub">OFFICIAL WEBSITE</div>
+  </div>
+  <button class="skip" onclick="closeOpening()">SKIP →</button>
+</div>
+
+<header>
+  <a href="#" class="logo">
+    自由社
+    <small>OFFICIAL WEBSITE</small>
+  </a>
+
+  <nav id="nav">
+    <a href="#about">自由社について</a>
+    <a href="#activities">活動内容</a>
+    <a href="#community">参加する</a>
+  </nav>
+
+  <button class="menu-button" onclick="toggleMenu()" aria-label="メニュー">☰</button>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-label">J I Y U S H A　/　# F S</div>
+    <h1>自由社</h1>
+    <p class="hero-description">
+      自由な発想から、新しい価値を。
+    </p>
+
+    <div class="hero-actions">
+      <a class="button primary" href="https://discord.gg/mRF2USrfsn" target="_blank" rel="noopener noreferrer">
+        Discord に参加する ↗
+      </a>
+      <a class="button" href="#about">詳しく見る</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">SCROLL TO EXPLORE　↓</div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="section-label">ABOUT US</div>
+      <h2 class="section-title">自由社について</h2>
+      <p class="section-text">
+        自由社は、開発・交流・ゲームなど、さまざまな活動を通じて
+        人と人がつながるコミュニティです。<br>
+        それぞれの個性や発想を尊重し、自由な活動と新しい挑戦を大切にしています。
+      </p>
+    </div>
+
+    <div class="about-mark reveal">自由社</div>
+  </div>
+</section>
+
+<section class="activities" id="activities">
+  <div class="reveal">
+    <div class="section-label">OUR ACTIVITIES</div>
+    <h2 class="section-title">活動内容</h2>
+  </div>
+
+  <div class="activity-grid">
+    <article class="activity-card reveal">
+      <div class="activity-number">01 / DEVELOPMENT</div>
+      <h3>開発</h3>
+      <p>プログラミングや制作活動を通じて、アイデアを形にする。</p>
+    </article>
+
+    <article class="activity-card reveal">
+      <div class="activity-number">02 / COMMUNICATION</div>
+      <h3>交流</h3>
+      <p>雑談や情報共有を通じて、メンバー同士のつながりを深める。</p>
+    </article>
+
+    <article class="activity-card reveal">
+      <div class="activity-number">03 / ALLIANCE</div>
+      <h3>同盟・連携</h3>
+      <p>他コミュニティとの協力や交流を通じて、新しい関係を築く。</p>
+    </article>
+
+    <article class="activity-card reveal">
+      <div class="activity-number">04 / GAMING</div>
+      <h3>ゲーム</h3>
+      <p>さまざまなゲームを楽しみ、メンバー同士で時間を共有する。</p>
+    </article>
+  </div>
+</section>
+
+<section class="community" id="community">
+  <div class="community-panel reveal">
+    <div class="section-label">JOIN OUR COMMUNITY</div>
+    <h3>自由社に参加する</h3>
+    <p>
+      開発、交流、同盟、ゲーム。<br>
+      あなたも自由社の一員として活動してみませんか。
+    </p>
+    <a class="button primary" href="https://discord.gg/mRF2USrfsn" target="_blank" rel="noopener noreferrer">
+      Discord に参加する ↗
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-logo">自由社</div>
+  <p>© <span id="year"></span> JIYUSHA. ALL RIGHTS RESERVED.</p>
+</footer>
+
+<script>
+const opening = document.getElementById("opening");
+let openingTimer;
+
+function closeOpening() {
+  opening.classList.add("hide");
+  clearTimeout(openingTimer);
+}
+
+openingTimer = setTimeout(closeOpening, 4500);
+
+function toggleMenu() {
+  document.getElementById("nav").classList.toggle("open");
+}
+
+document.querySelectorAll("#nav a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.getElementById("nav").classList.remove("open");
+  });
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(element => {
+  observer.observe(element);
+});
+</script>
+
+</body>
+</html>
